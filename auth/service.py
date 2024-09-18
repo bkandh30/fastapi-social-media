@@ -69,3 +69,35 @@ async def get_current_user(db: Session, token: str = Depends(oauth2_bearer)):
 # Retrieve user from user id
 async def get_user_from_user_id(db: Session, user_id: int):
     return db.query(User).filter(User.id == user_id).first()
+
+#Create User
+async def create_user(db: Session, user: UserCreate):
+    db_user = User(
+        email=user.email.lower().strip(),
+        username=user.username.lower().strip(),
+        hashed_password=bcrypt_context.hash(user.password),
+        dob=user.dob or None,
+        gender=user.gender or None,
+        bio=user.bio or None,
+        location=user.location or None,
+        profile_pic=user.profile_pic or None,
+        name=user.name or None
+    )
+    #Add information to database
+    db.add(db_user)
+    #Commit the changes
+    db.commit()
+
+    return db_user
+
+#User Authentication
+async def authenticate(db: Session, username: str, password: str):
+    #Check for user
+    db_user = db.query(User).filter(User.username == username).first()
+    if not db_user:
+        print("No User Found")
+        return None
+    if not bcrypt_context.verify(password, db_user.hashed_password):
+        return None
+    #Return true
+    return db_user
