@@ -105,11 +105,12 @@ async def authenticate(db: Session, username: str, password: str):
 
 #Update User
 async def update_user(db: Session, db_user: User, user_update: UserUpdate):
+    #Update the user information
     db_user.bio = user_update.bio or db_user.bio
     db_user.name = user_update.name or db_user.bio
     db_user.dob = user_update.dob or db_user.bio
     db_user.gender = user_update.gender or db_user.bio
     db_user.location = user_update.location or db_user.bio
     db_user.profile_pic = user_update.profile_pic or db_user.bio
-
+    #Commit the changes
     db.commit()
