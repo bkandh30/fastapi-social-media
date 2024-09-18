@@ -4,7 +4,7 @@ from datetime import datetime, timezone
 from sqlalchemy.orm import relationship
 
 from database import Base
-from enums import Gender
+from .enums import Gender
 
 #User Class
 class User(Base):

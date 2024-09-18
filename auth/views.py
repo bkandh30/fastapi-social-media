@@ -4,10 +4,9 @@ from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from datetime import datetime
 
-
-from schemas import UserCreate, UserUpdate, User as UserSchema
+from .schemas import UserCreate, UserUpdate, User as UserSchema
 from database import get_db
-from service import (
+from .service import (
     existing_user,
     create_access_token,
     get_current_user,

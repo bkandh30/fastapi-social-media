@@ -4,14 +4,15 @@ from sqlalchemy.orm import Session
 
 from typing import Final
 from dotenv import load_dotenv
+import os
 
 from passlib.context import CryptContext
 from fastapi.security import OAuth2PasswordBearer
 from jose import jwt, JWTError
 from datetime import timedelta, datetime, timezone
 
-from models import User
-from schemas import UserCreate, UserUpdate
+from .models import User
+from .schemas import UserCreate, UserUpdate
 
 #Password Hashing
 bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")  # hasing password
@@ -101,3 +102,14 @@ async def authenticate(db: Session, username: str, password: str):
         return None
     #Return true
     return db_user
+
+#Update User
+async def update_user(db: Session, db_user: User, user_update: UserUpdate):
+    db_user.bio = user_update.bio or db_user.bio
+    db_user.name = user_update.name or db_user.bio
+    db_user.dob = user_update.dob or db_user.bio
+    db_user.gender = user_update.gender or db_user.bio
+    db_user.location = user_update.location or db_user.bio
+    db_user.profile_pic = user_update.profile_pic or db_user.bio
+
+    db.commit()

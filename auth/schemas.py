@@ -3,7 +3,7 @@ from pydantic import BaseModel
 from datetime import date, datetime
 from typing import Optional
 
-from enums import Gender
+from .enums import Gender
 
 #Data provided by user
 class UserBase(BaseModel):
