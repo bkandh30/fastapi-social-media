@@ -9,12 +9,6 @@ from enums import Gender
 class UserBase(BaseModel):
     email: str
     username: str
-    name: str
-    dob: Optional[date] = None
-    gender: Optional[Gender] = None
-    bio: Optional[Gender] = None
-    location: Optional[str] = None
-    profile_pic: Optional[str] = None
 
 #Data created by user
 class UserCreate(UserBase):
