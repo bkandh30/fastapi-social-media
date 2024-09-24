@@ -15,8 +15,8 @@ from .service import (
     unlike_post_service,
     liked_users_post_service,
 )
-from ..auth.service import get_current_user, existing_user
-from ..auth.schemas import User
+from auth.service import get_current_user, existing_user
+from auth.schemas import User
 
 router = APIRouter(prefix="/posts", tags=["posts"])
 

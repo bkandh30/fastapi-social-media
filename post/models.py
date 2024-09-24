@@ -32,7 +32,7 @@ class Post(Base):
     created_date = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
     likes_count = Column(Integer, default=0)
     #Foreign key with User
-    author_id = Column(Integer, ForeignKey("user.id"))
+    author_id = Column(Integer, ForeignKey("users.id"))
 
     #Many-to-many relationships
     author = relationship("auth.models.User", back_populates="posts")

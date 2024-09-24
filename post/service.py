@@ -4,8 +4,8 @@ import re
 from sqlalchemy import desc
 
 from datetime import datetime
-from schemas import PostCreate, Post as PostSchema, Hashtag as HashtagSchema
-from models import Post, Hashtag, post_hashtags
+from .schemas import PostCreate, Post as PostSchema, Hashtag as HashtagSchema
+from .models import Post, Hashtag, post_hashtags
 from auth.models import User
 from auth.schemas import User as UserSchema
 
@@ -32,6 +32,8 @@ async def create_post_service(db:Session, post: PostCreate, user_id: int):
         location = post.location,
         author_id = user_id
     )
+
+    await create_hashtag_service(db, db_post)
 
     db.add(db_post)
     db.commit()
