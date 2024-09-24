@@ -6,6 +6,8 @@ from sqlalchemy.orm import relationship
 from database import Base
 from .enums import Gender
 
+from post.models import post_likes, Post
+
 #User Class
 class User(Base):
     __tablename__ = "users"
@@ -24,3 +26,9 @@ class User(Base):
     profile_pic = Column(String) #Link of user display picture
     bio = Column(String)
     location = Column(String)
+
+    posts = relationship(Post, back_populates="author")
+
+    liked_posts = relationship(
+        Post, secondary=post_likes, back_populates="liked_by_users"
+    )
