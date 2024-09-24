@@ -52,7 +52,7 @@ async def get_posts_from_hashtag_service(db: Session, hashtag_name:str):
     return hashtag.posts
 
 #Get random posts for user feed by returning the latest posts of all users
-async def get_random_posts_svc(
+async def get_random_posts_service(
     db: Session, page: int = 1, limit: int = 10, hashtag: str = None
 ):
     total_posts = db.query(Post).count()
@@ -87,7 +87,7 @@ async def delete_post_service(db:Session, post_id: int):
     db.commit()
 
 #Like post
-async def like_post_svc(db: Session, post_id: int, username: str):
+async def like_post_service(db: Session, post_id: int, username: str):
     post = await get_post_from_post_id_service(db, post_id)
     if not post:
         return False, "invalid post_id"
@@ -107,7 +107,7 @@ async def like_post_svc(db: Session, post_id: int, username: str):
     return True, "done"
 
 #Unlike post
-async def unlike_post_svc(db: Session, post_id: int, username: str):
+async def unlike_post_service(db: Session, post_id: int, username: str):
     post = await get_post_from_post_id_service(db, post_id)
     if not post:
         return False, "invalid post_id"
@@ -126,7 +126,7 @@ async def unlike_post_svc(db: Session, post_id: int, username: str):
     return True, "done"
 
 # Users who liked post
-async def liked_users_post_svc(db: Session, post_id: int) -> list[UserSchema]:
+async def liked_users_post_service(db: Session, post_id: int) -> list[UserSchema]:
     post = await get_post_from_post_id_service(db, post_id)
     if not post:
         return []
