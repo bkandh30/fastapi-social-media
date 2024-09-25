@@ -12,9 +12,11 @@ class Activity(Base):
     username = Column(String, nullable=False)
     timestamp = Column(DateTime(timezone=True), nullable= False, default=lambda: datetime.now(timezone.utc))
 
+    #Post Liking Activity
     liked_post_id = Column(Integer)
     username_like = Column(String)
     liked_post_id = Column(String)
 
+    #Following Activity
     follower_username = Column(String)
     follower_user_pic = Column(String)
