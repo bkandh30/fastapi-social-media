@@ -87,7 +87,7 @@ async def get_followers_service(db:Session, user_id: int) -> list[FollowersList]
     return  FollowersList(followers=followers)
 
 #Get Following
-async def get_followers_service(db:Session, user_id: int) -> list[FollowingList]:
+async def get_following_service(db:Session, user_id: int) -> list[FollowingList]:
     db_user = await get_user_from_user_id(db, user_id)
     
     if not db_user:
