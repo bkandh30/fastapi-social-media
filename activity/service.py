@@ -1,7 +1,7 @@
 #Business Logic
 from sqlalchemy.orm import Session
 
-from models import Activity
+from .models import Activity
 
 #Get activities by a username
 async def get_activities_by_username(db: Session, username: str, page: int=1, limit: int=10) -> list[Activity]:

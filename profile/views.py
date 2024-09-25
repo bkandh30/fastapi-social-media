@@ -2,8 +2,8 @@ from fastapi import APIRouter, status, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from database import get_db
-from schemas import Profile, FollowersList, FollowingList
-from service import (
+from .schemas import Profile, FollowersList, FollowingList
+from .service import (
     get_followers_service,
     get_following_service,
     follow_service,
